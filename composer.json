@@ -1,0 +1,30 @@
+{
+    "name": "taknepoidet/vkapisdk",
+    "description": "PHP Wrapper for API VK",
+    "homepage": "https://github.com/TakNePoidet/VkApiSDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yakin Nikita",
+            "email": "yakin95@gmail.com",
+            "homepage": "https://taknepoidet.ru",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "VkApiSDK\\": ""
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
