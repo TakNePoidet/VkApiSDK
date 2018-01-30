@@ -11,7 +11,7 @@ try {
 	
 
 
-	if (!empty(TOKEN)) {
+	if (empty(TOKEN)) {
 		if (!empty($_GET['code'])) {
 			$access_token = $VkApiSDK->getAccessToken(CLIENT, SECRET, $_GET['code'], redirect_uri)['access_token'];
 
