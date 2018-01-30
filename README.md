@@ -1,4 +1,5 @@
 # VkApiSDK
+```php
 <?php
 include 'vendor/autoload.php';
 if(true){
@@ -34,3 +35,4 @@ try {
 } catch (\VkApiSDK\Exception $error) {
     echo $error->getMessage();
 }
+```
