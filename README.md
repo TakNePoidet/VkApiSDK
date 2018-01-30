@@ -1,4 +1,4 @@
-# VkApiSDK
+```php
 <?php
 include 'vendor/autoload.php';
 if(true){
@@ -16,17 +16,17 @@ try {
 
 		} else {
 			echo $VkApiSDK->getUrlAuthorize([
-				'client_id'		=> CLIENT,
-				'redirect_uri'	=> redirect_uri,
-				'scope' 		=> "offline,wall,photos,friends",
-				'response_type'	=> 'code',
+				'client_id'=> CLIENT,
+				'redirect_uri'=> redirect_uri,
+				'scope'=> "offline,wall,photos,friends",
+				'response_type'=> 'code',
 			]);
 		}
 	} else {
 		$VkApiSDK->setToken(TOKEN);
 
 		print_r($VkApiSDK->Request('users.get', [
-			'owner_id'	=> '20513451',
+			'owner_id'=> '20513451',
 		]));
 
 		echo "\n";
@@ -34,3 +34,5 @@ try {
 } catch (\VkApiSDK\Exception $error) {
     echo $error->getMessage();
 }
+?>
+```
