@@ -13,19 +13,19 @@
 
 
 		protected static $map = [
-			'val' 	 => this,
+			'val_' 	 => true,
 		];
 
 
-		protected $val;
+		protected $val_;
 
 
-		public function setVal($val) {
-			$this->val = $val;
+		public function setVal($val_) {
+			$this->val_ = $val_;
 		}
 
 		public function getVal() {
-			return $this->val;
+			return $this->val_;
 		}
 
 
