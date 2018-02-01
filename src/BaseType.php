@@ -13,11 +13,11 @@ abstract class BaseType {
 
 
 
+        
         if (count(array_intersect_key(array_flip(static::$requiredParams), $data)) === count(static::$requiredParams)) {
             return true;
         }
-
-        // var_dump(static::$requiredParams);
+        print_r(static::$requiredParams);
         // throw new Exception();
     }
 
@@ -54,7 +54,17 @@ abstract class BaseType {
             if (isset($data[$key]) && (!is_array($data[$key]) || (is_array($data[$key]) && !empty($data[$key]))) || !empty(static::$map['response'])) {
                 $method = 'set' . self::toCamelCase($key);
                 if ($item === true && !is_array($item)) {
-                    $this->$method($data[$key]);
+
+
+                    if(!empty(static::$map['response'])) {
+                        $data_ = $data;
+                    } else {
+                        $data_ = $data[$key];
+                    }
+                    
+                    $this->$method($data_);
+
+
                 } elseif (is_array($item)) {
                     $array = array();
                     
@@ -69,7 +79,6 @@ abstract class BaseType {
                     }
                     $this->$method($array);
                 } else {
-
 
                     if (!is_string($data[$key]) && !is_integer($data[$key])){
                         $this->$method($item::fromResponse($data[$key]));
@@ -92,6 +101,7 @@ abstract class BaseType {
         if ($data === true) {
             return true;
         }
+
 
         // self::validate($data);
         $instance = new static();

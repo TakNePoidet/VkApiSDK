@@ -13,7 +13,7 @@
 
 
 		protected static $map = [
-			'response' 	 => true,
+			'response' 	 => ApiTypes\Ads\TargStats::class,
 		];
 
 

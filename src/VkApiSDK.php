@@ -71,6 +71,7 @@
 			$response = json_decode($this->curl($url), true);
 
 
+
 			if (!$response || !isset($response['access_token'])) {
 				throw new Exception("Invalid response for access_token request");
 			}
@@ -88,6 +89,9 @@
 
 
 			$response = $this->call($method, $params);
+
+			// print_r($response);
+
 
 			if (!empty($method_['response'])) {
 				return  $method_['response']::fromResponse($response['response']);
@@ -108,22 +112,39 @@
 		
 			$url = $this->getUrl() . $method .'?' . http_build_query($params);
 
-
-
-
-			
-			
+ 			
 			$response = json_decode($this->curl($url), true);
-
-
+			
 			if (!$response || !isset($response['response'])) {
-				throw new Exception("Invalid response for {$method} request");
+				throw new ExceptionMethod(ApiTypes\Base\Error::fromResponse($response['error']));
 			}
 
 			return $response;
 		}
 
 
+
+		public function Upload($file_name, $url) {
+			if (!file_exists($file_name)) {
+			throw new Exception('File not found: '. $file_name);
+			}
+			$curl = curl_init($url);
+			curl_setopt($curl, CURLOPT_POST, true);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($curl, CURLOPT_POSTFIELDS, array('file' => new \CURLfile($file_name)));
+			$json = curl_exec($curl);
+			$error = curl_error($curl);
+			if ($error) {
+			log_error($error);
+			throw new Exception("Failed {$url} request");
+			}
+			curl_close($curl);
+			$response = json_decode($json, true);
+			if (!$response) {
+				throw new Exception("Invalid response for {$url} request");
+			}
+			return $response;
+		}
 
 		private function curl($url) {
 			$curl = curl_init($url);
@@ -150,4 +171,5 @@
 			}
 			return $json;
 		}
+
 	}
