@@ -79,9 +79,14 @@ abstract class BaseType {
                     }
                     $this->$method($array);
                 } else {
-
-                    if (!is_string($data[$key]) && !is_integer($data[$key])){
-                        $this->$method($item::fromResponse($data[$key]));
+                   
+                    if(!empty(static::$map['response'])) {
+                        $data_ = $data;
+                    } else {
+                        $data_ = $data[$key];
+                    }
+                    if (!is_string($data_) && !is_integer($data_)){
+                        $this->$method($item::fromResponse($data_));
                     } else {
                          $this->$method($item::fromResponse(['val_' => $data[$key]]));
                     }
